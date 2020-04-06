@@ -1,5 +1,5 @@
 from .dao import BuildingDAO, BuildingTypeDAO, PersonDAO, ProductionDAO, \
-    ResourceDAO, ResourcePackDAO, ResourceTypeDAO, \
+    ResourceDAO, ResourcePackDAO, ResourceTypeDAO, SearchZoneDAO, \
     ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, ShapeMultiPolygonDAO, \
     SkillLevelDAO, SkillTypeDAO
 from .database import db
@@ -12,6 +12,7 @@ ProductionDao = ProductionDAO(db)
 ResourceDao = ResourceDAO(db)
 ResourcePackDao = ResourcePackDAO(db)
 ResourceTypeDao = ResourceTypeDAO(db)
+SearchZoneDao = SearchZoneDAO(db)
 ShapePointDao = ShapePointDAO(db)
 ShapeRingDao = ShapeRingDAO(db)
 ShapePolygonDao = ShapePolygonDAO(db)

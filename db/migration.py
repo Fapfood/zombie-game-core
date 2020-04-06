@@ -6,8 +6,8 @@ from db.entity import BuildingTypeEntity, PersonEntity, ProductionEntity, \
 
 
 def migration():
-    some_engine = create_engine('sqlite:////Users/matr/dev/flask-test/test.db')
-    Session = sessionmaker(bind=some_engine)
+    engine = create_engine('sqlite:////Users/matr/dev/zombie-game-core/test.db')
+    Session = sessionmaker(bind=engine)
     session = Session()
 
     skill_type_1 = SkillTypeEntity(name='Ciesielstwo')
