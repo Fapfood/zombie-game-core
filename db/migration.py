@@ -2,7 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from db.entity import BuildingTypeEntity, ProductionEntity, \
-    ResourceEntity, ResourcePackEntity, ResourceTypeEntity, SkillLevelEntity, SkillTypeEntity
+    ResourcePackEntity, ResourceTypeEntity, \
+    SearchZoneTypeEntity, SkillLevelEntity, SkillTypeEntity
 
 
 def migration():
@@ -42,11 +43,6 @@ def migration():
     resource_type_2 = ResourceTypeEntity(name='Deska')
     session.add(resource_type_2)
 
-    resource_1 = ResourceEntity(type=resource_type_1)
-    session.add(resource_1)
-    resource_2 = ResourceEntity(type=resource_type_2)
-    session.add(resource_2)
-
     resource_pack_1 = ResourcePackEntity(type=resource_type_1, quantity=1)
     session.add(resource_pack_1)
     resource_pack_2 = ResourcePackEntity(type=resource_type_2, quantity=2)
@@ -54,11 +50,17 @@ def migration():
 
     production_1 = ProductionEntity(minutes=15, required_skills=[skill_level_2],
                                     from_resources=[resource_pack_1],
-                                    to_resources=[resource_pack_2])
+                                    to_resources_successful=[resource_pack_2],
+                                    to_resources_interrupted=[])
     session.add(production_1)
 
-    building_type_1 = BuildingTypeEntity(name='Tartak', max_workers=1, available_productions=[production_1])
+    building_type_1 = BuildingTypeEntity(name='Sawmill', max_workers=1,
+                                         worker_icon_male='👷‍♂️', worker_icon_female='👷‍♀️',
+                                         available_productions=[production_1])
     session.add(building_type_1)
+
+    search_zone_type_1 = SearchZoneTypeEntity(name='Car')
+    session.add(search_zone_type_1)
 
     session.commit()
     session.close()

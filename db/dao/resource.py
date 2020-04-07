@@ -16,13 +16,6 @@ class ResourceDAO(BaseDAO):
         obj = self.db.session.query(self.class_entity).filter_by(resource_type_id=id).all()
         return obj
 
-    def update_by_id(self, id, **kwargs):
-        query = self.db.session.query(self.class_entity).filter_by(id=id)
-        query.update(kwargs)
-        obj = query.one_or_none()
-        self.db.session.commit()
-        return obj
-
     def change_quantity(self, id, change_by):
         obj = self.read_by_id(id)
         obj.quantity += change_by

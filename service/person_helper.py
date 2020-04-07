@@ -8,7 +8,7 @@ def generate_gender():
 
 
 def generate_first_name(gender):
-    gender = 'male' if gender == 'm' else 'female'
+    gender = 'female' if gender == 'f' else 'male'
     return get_first_name(gender)
 
 
@@ -17,7 +17,28 @@ def generate_last_name():
 
 
 def generate_attitude():
-    return randint(0, 100)
+    return randint(51, 100)
+
+
+def generate_age():
+    return randint(15, 65)
+
+
+def generate_icon(gender, age):
+    if age <= 18:
+        males = ['👦']
+        females = ['👧']
+    elif age > 50:
+        males = ['👴', '👨‍🦳']
+        females = ['👵', '👩‍🦳']
+    else:
+        males = ['👨', '🧔', '👨‍🦰', '👨‍🦱', '👨‍🦲', '👱‍♂️']
+        females = ['👩', '👩‍🦰', '👩‍🦱', '👩‍🦲', '👱‍♀️']
+
+    if gender == 'f':
+        return choice(females)
+    else:
+        return choice(males)
 
 
 def generate_levels(n, bonuses=()):

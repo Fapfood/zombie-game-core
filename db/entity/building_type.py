@@ -11,4 +11,6 @@ class BuildingTypeEntity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     max_workers = db.Column(db.Integer, nullable=False)
+    worker_icon_male = db.Column(db.String(1), nullable=False)
+    worker_icon_female = db.Column(db.String(1), nullable=False)
     available_productions = db.relationship('ProductionEntity', secondary=association_table)

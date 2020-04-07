@@ -15,9 +15,7 @@ class PersonDAO(BaseDAO):
         if obj is not None:
             obj.update(**kwargs)
             self.db.session.commit()
-            return obj
-        else:
-            return None
+        return obj
 
     def delete(self, id):
         obj = self.read_by_id(id)

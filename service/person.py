@@ -1,7 +1,7 @@
 from random import choice
 
-from service.person_helper import generate_gender, generate_first_name, generate_last_name, generate_attitude, \
-    generate_levels
+from service.person_helper import generate_gender, generate_first_name, generate_last_name, \
+    generate_age, generate_attitude, generate_icon, generate_levels
 
 
 class PersonService:
@@ -10,12 +10,17 @@ class PersonService:
         self.skillTypeDao = skillTypeDao
         self.skillLevelDao = skillLevelDao
 
-    def create_person(self):
+    def generate_person(self, long, lat):
         gender = generate_gender()
+        age = generate_age()
         person = self.personDao.create(first_name=generate_first_name(gender),
                                        last_name=generate_last_name(),
                                        gender=gender,
+                                       age=age,
+                                       icon=generate_icon(gender, age),
                                        attitude=generate_attitude(),
+                                       long=long,
+                                       lat=lat,
                                        owned_skills=self._create_skill_levels(3, (2, 1)))
         return person
 
