@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from db.entity import BuildingTypeEntity, PersonEntity, ProductionEntity, \
+from db.entity import BuildingTypeEntity, ProductionEntity, \
     ResourceEntity, ResourcePackEntity, ResourceTypeEntity, SkillLevelEntity, SkillTypeEntity
 
 
@@ -14,6 +14,14 @@ def migration():
     session.add(skill_type_1)
     skill_type_2 = SkillTypeEntity(name='Stolarstwo')
     session.add(skill_type_2)
+    skill_type_3 = SkillTypeEntity(name='Generic1')
+    session.add(skill_type_3)
+    skill_type_4 = SkillTypeEntity(name='Generic2')
+    session.add(skill_type_4)
+    skill_type_5 = SkillTypeEntity(name='Generic3')
+    session.add(skill_type_5)
+    skill_type_6 = SkillTypeEntity(name='Generic4')
+    session.add(skill_type_6)
 
     skill_level_1 = SkillLevelEntity(type=skill_type_1, level=1)
     session.add(skill_level_1)
@@ -28,11 +36,6 @@ def migration():
     session.add(skill_level_5)
     skill_level_6 = SkillLevelEntity(type=skill_type_2, level=3)
     session.add(skill_level_6)
-
-    person_1 = PersonEntity(name='Kamil', owned_skills=[skill_level_1])
-    session.add(person_1)
-    person_2 = PersonEntity(name='Maciej', owned_skills=[skill_level_2])
-    session.add(person_2)
 
     resource_type_1 = ResourceTypeEntity(name='Kloda')
     session.add(resource_type_1)

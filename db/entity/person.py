@@ -9,7 +9,10 @@ association_table = db.Table('skill_level_x_person', db.Model.metadata,
 class PersonEntity(db.Model):
     __tablename__ = 'person'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
+    attitude = db.Column(db.Integer, nullable=False)
     owned_skills = db.relationship('SkillLevelEntity', secondary=association_table)
     building_id = db.Column(db.Integer, db.ForeignKey('building.id'))
     assigned_to = db.relationship('BuildingEntity', backref='workers')

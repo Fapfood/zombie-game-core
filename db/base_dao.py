@@ -3,8 +3,12 @@ class BaseDAO:
         self.db = db
         self.class_entity = class_entity
 
+    def _query_by_id(self, id):
+        obj = self.db.session.query(self.class_entity).filter_by(id=id)
+        return obj
+
     def read_by_id(self, id):
-        obj = self.db.session.query(self.class_entity).filter_by(id=id).one_or_none()
+        obj = self._query_by_id(id).one_or_none()
         return obj
 
     def read_all(self):
@@ -18,7 +22,7 @@ class BaseDAO:
         return obj
 
     def update_by_id(self, id, **kwargs):
-        query = self.db.session.query(self.class_entity).filter_by(id=id)
+        query = self._query_by_id(id)
         query.update(kwargs)
         obj = query.one_or_none()
         self.db.session.commit()
