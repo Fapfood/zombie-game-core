@@ -5,7 +5,7 @@ class ResourcePackEntity(db.Model):
     __tablename__ = 'resource_pack'
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
-    resource_type_id = db.Column(db.Integer, db.ForeignKey('resource_type.id'))
+    resource_type_id = db.Column(db.Integer, db.ForeignKey('resource_type.id'), nullable=False)
     type = db.relationship('ResourceTypeEntity')
 
     def __le__(self, other):

@@ -1,8 +1,8 @@
 from ..database import db
 
 
-class SkillLevelEntity(db.Model):
-    __tablename__ = 'skill_level'
+class SkillEntity(db.Model):
+    __tablename__ = 'skill'
     id = db.Column(db.Integer, primary_key=True)
     level = db.Column(db.Integer, nullable=False)
     skill_type_id = db.Column(db.Integer, db.ForeignKey('skill_type.id'), nullable=False)

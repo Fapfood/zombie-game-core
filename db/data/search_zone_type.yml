@@ -1,0 +1,9 @@
+list:
+  - name: car
+    resource_drop_table:
+      - name: bottle of water
+        probability: 100
+      - name: bottle of water
+        probability: 60
+      - name: fire extinguisher
+        probability: 90
