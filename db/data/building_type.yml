@@ -4,37 +4,6 @@ list:
     worker_icon_male: '👷‍♂️'
     worker_icon_female: '👷‍♀️'
     available_productions:
-      - minutes: 15
-        required_skills:
-          - name: carpentry
-            level: 2
-        from_resources:
-          - name: log
-            quantity: 1
-          - name: saw
-            quantity: 1
-        to_resources_successful:
-          - name: plank
-            quantity: 2
-          - name: saw
-            quantity: 1
-        to_resources_interrupted:
-          - name: saw
-            quantity: 1
-      - minutes: 20
-        required_skills:
-          - name: carpentry
-            level: 3
-        from_resources:
-          - name: log
-            quantity: 1
-          - name: saw
-            quantity: 1
-        to_resources_successful:
-          - name: plank
-            quantity: 3
-          - name: saw
-            quantity: 1
-        to_resources_interrupted:
-          - name: saw
-            quantity: 1
+      - name: 1 log to 2 planks
+      - name: 1 log to 3 planks
+

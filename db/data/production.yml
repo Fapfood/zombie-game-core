@@ -1,0 +1,31 @@
+list:
+  - name: 1 log to 2 planks
+    minutes: 15
+    required_skills:
+      - type.name: carpentry
+        level: 2
+    required_tools:
+      - type.name: saw
+        quantity: 1
+    from_resources:
+      - type.name: log
+        quantity: 1
+    to_resources_successful:
+      - type.name: plank
+        quantity: 2
+    to_resources_interrupted: []
+  - name: 1 log to 3 planks
+    minutes: 20
+    required_skills:
+      - type.name: carpentry
+        level: 3
+    required_tools:
+      - type.name: saw
+        quantity: 1
+    from_resources:
+      - type.name: log
+        quantity: 1
+    to_resources_successful:
+      - type.name: plank
+        quantity: 3
+    to_resources_interrupted: []

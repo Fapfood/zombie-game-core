@@ -16,7 +16,6 @@ class BaseDAO:
         return objs
 
     def read_all_by(self, **kwargs):
-        print(kwargs)
         objs = self.db.session.query(self.class_entity).filter_by(**kwargs).all()
         return objs
 
