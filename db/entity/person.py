@@ -17,6 +17,6 @@ class PersonEntity(db.Model):
     attitude = db.Column(db.Integer, nullable=False)
     long = db.Column(db.Float, nullable=False)
     lat = db.Column(db.Float, nullable=False)
-    owned_skills = db.relationship('SkillEntity', secondary=association_table)
+    skills = db.relationship('SkillEntity', secondary=association_table)
     building_id = db.Column(db.Integer, db.ForeignKey('building.id'))
     assigned_to = db.relationship('BuildingEntity', backref='workers')

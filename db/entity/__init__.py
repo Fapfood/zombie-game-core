@@ -1,7 +1,7 @@
 from .building import BuildingEntity
 from .building_type import BuildingTypeEntity
 from .person import PersonEntity
-from .production import ProductionEntity
+from .production_type import ProductionTypeEntity
 from .resource import ResourceEntity
 from .resource_drop_probability import ResourceDropProbabilityEntity
 from .resource_pack import ResourcePackEntity
@@ -9,7 +9,11 @@ from .resource_type import ResourceTypeEntity
 from .search_zone import SearchZoneEntity
 from .search_zone_action import SearchZoneActionEntity
 from .search_zone_type import SearchZoneTypeEntity
-from .shape import ShapePointEntity, ShapeRingEntity, ShapePolygonEntity, ShapeMultiPolygonEntity
+from .shape import ShapeMultiPolygonEntity
+from .shape import ShapePointEntity
+from .shape import ShapePolygonEntity
+from .shape import ShapeRingEntity
 from .skill import SkillEntity
 from .skill_level import SkillLevelEntity
+from .skill_pack import SkillPackEntity
 from .skill_type import SkillTypeEntity

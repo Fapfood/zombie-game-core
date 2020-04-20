@@ -27,7 +27,7 @@ class BaseDAO:
 
     def update_by_id(self, id, **kwargs):
         query = self._query_by_id(id)
-        query.update(**kwargs)
+        query.update(kwargs)
         obj = query.one_or_none()
         self.db.session.commit()
         return obj

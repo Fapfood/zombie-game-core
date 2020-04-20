@@ -4,6 +4,7 @@ from ..database import db
 class SkillLevelEntity(db.Model):
     __tablename__ = 'skill_level'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
     level = db.Column(db.Integer, nullable=False)
     skill_type_id = db.Column(db.Integer, db.ForeignKey('skill_type.id'), nullable=False)
     type = db.relationship('SkillTypeEntity')

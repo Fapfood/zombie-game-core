@@ -4,6 +4,5 @@ list:
     worker_icon_male: '👷‍♂️'
     worker_icon_female: '👷‍♀️'
     available_productions:
-      - name: 1 log to 2 planks
-      - name: 1 log to 3 planks
-
+      - name: log1 to plank2
+      - name: log1 to plank3

@@ -4,6 +4,7 @@ from ..database import db
 class ResourcePackEntity(db.Model):
     __tablename__ = 'resource_pack'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     resource_type_id = db.Column(db.Integer, db.ForeignKey('resource_type.id'), nullable=False)
     type = db.relationship('ResourceTypeEntity')
