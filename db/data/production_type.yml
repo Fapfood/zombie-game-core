@@ -49,3 +49,24 @@ list:
           name: plank
         quantity: 3
     to_resources_interrupted: []
+  - name: plank2 to shield1
+    minutes: 20
+    required_skills:
+      - name: carpentry2
+        skills:
+          - name: carpentry2
+            type:
+              name: carpentry
+            level: 2
+    required_tools: []
+    from_resources:
+      - name: plank2
+        type:
+          name: plank
+        quantity: 2
+    to_resources_successful:
+      - name: shield1
+        type:
+          name: shield
+        quantity: 1
+    to_resources_interrupted: []

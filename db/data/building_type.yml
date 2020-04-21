@@ -1,8 +1,14 @@
 list:
   - name: sawmill
-    max_workers: 1
+    max_workers: 3
     worker_icon_male: '👷‍♂️'
     worker_icon_female: '👷‍♀️'
     available_productions:
       - name: log1 to plank2
       - name: log1 to plank3
+      - name: plank2 to shield1
+  - name: generic1
+    max_workers: 1
+    worker_icon_male: '️'
+    worker_icon_female: ''
+    available_productions: []

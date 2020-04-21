@@ -4,7 +4,7 @@ from ..database import db
 class ResourceEntity(db.Model):
     __tablename__ = 'resource'
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer, nullable=False, default=0)
+    available = db.Column(db.Boolean, nullable=False, default=True)
     quality = db.Column(db.Float, nullable=False, default=100)
     decay = db.Column(db.Float, nullable=False, default=0)
     resource_type_id = db.Column(db.Integer, db.ForeignKey('resource_type.id'), nullable=False)

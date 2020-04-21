@@ -15,8 +15,3 @@ class ResourceDAO(BaseDAO):
         #     ResourceTypeEntity.id == id).all()
         obj = self.db.session.query(self.class_entity).filter_by(resource_type_id=id).all()
         return obj
-
-    def delete(self, id):
-        obj = self.read_by_id(id)
-        self.db.session.delete(obj)
-        self.db.session.commit()

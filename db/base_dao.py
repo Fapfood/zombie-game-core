@@ -31,3 +31,21 @@ class BaseDAO:
         obj = query.one_or_none()
         self.db.session.commit()
         return obj
+
+    # def update_by_id(self, id, **kwargs):
+    #     obj = self.read_by_id(id)
+    #     if obj is not None:
+    #         obj.update(**kwargs)
+    #         self.db.session.commit()
+    #     return obj
+
+    def delete_by_id(self, id):
+        obj = self.read_by_id(id)
+        self.db.session.delete(obj)
+        self.db.session.commit()
+
+    # def delete(self, id):
+    #     obj = self.read_by_id(id)
+    #     if obj is not None:
+    #         self.db.session.delete(obj)
+    #         self.db.session.commit()

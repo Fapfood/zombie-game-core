@@ -10,15 +10,6 @@ class PersonDAO(BaseDAO):
         objs = self.db.session.query(self.class_entity).filter(self.class_entity.name.in_(names)).all()
         return objs
 
-    def update_by_id(self, id, **kwargs):
-        obj = self.read_by_id(id)
-        if obj is not None:
-            obj.update(**kwargs)
-            self.db.session.commit()
-        return obj
-
-    def delete(self, id):
-        obj = self.read_by_id(id)
-        if obj is not None:
-            self.db.session.delete(obj)
-            self.db.session.commit()
+    def read_all_by_building_id(self, id):
+        objs = self.db.session.query(self.class_entity).filter_by(building_id=id).all()
+        return objs

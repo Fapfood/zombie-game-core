@@ -4,11 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from yaml import load
 
 from db import ProductionTypeDAO, ResourceTypeDAO, ResourcePackDAO, SkillTypeDAO, SkillLevelDAO, SkillPackDAO, \
-    BuildingTypeDAO
+    BuildingTypeDAO, ResourceDAO, SkillDAO, PersonDAO, BuildingDAO
+from db import ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, ShapeMultiPolygonDAO
 from db.entity import SkillTypeEntity, ResourceTypeEntity
-from service import ProductionService, SkillService, BuildingService
+from service import ProductionService, SkillService, BuildingService, ShapeService, ResourceService, PersonService
 from service.model.building import BuildingType
 from service.model.production import ProductionType
+from service.model.shape import Polygon, MultiPolygon
+from service.shape_helper import ring_regular
 
 
 def migration():
@@ -37,9 +40,12 @@ def migration():
     session.commit()
     session.close()
 
+    ShapeSvc = ShapeService(ShapePointDAO(Base), ShapeRingDAO(Base), ShapePolygonDAO(Base), ShapeMultiPolygonDAO(Base))
     SkillSvc = SkillService(SkillTypeDAO(Base), SkillLevelDAO(Base), SkillPackDAO(Base))
-    ProductionSvc = ProductionService(ProductionTypeDAO(Base), ResourceTypeDAO(Base), ResourcePackDAO(Base), SkillSvc)
+    ResourceSvc = ResourceService(ResourceTypeDAO(Base), ResourcePackDAO(Base))
+    ProductionSvc = ProductionService(ProductionTypeDAO(Base), ResourceSvc, SkillSvc)
     BuildingSvc = BuildingService(BuildingTypeDAO(Base), ProductionSvc)
+    PersonSvc = PersonService(PersonDAO(Base), SkillTypeDAO(Base), SkillDAO(Base))
 
     with open('data/production_type.yml', encoding='utf8') as f:
         file = load(f.read())['list']
@@ -52,6 +58,25 @@ def migration():
 
     for elem in file:
         BuildingSvc.get_or_create_building_type(BuildingType.from_yaml(elem))
+
+    # ResourceDao = ResourceDAO(Base)
+    # ResourceDao.create(resource_type_id=8, quality=100, decay=0)
+    # ResourceDao.create(resource_type_id=9, quality=90, decay=0)
+    # ResourceDao.create(resource_type_id=9, quality=100, decay=0)
+    # ResourceDao.create(resource_type_id=1, quality=90, decay=0)
+    # PersonSvc.generate_person(19.921910, 50.037894)
+    # PersonSvc.generate_person(19.921710, 50.037894)
+    # PersonSvc.generate_person(19.921510, 50.037894)
+    # PersonSvc.generate_person(19.921310, 50.037894)
+    # BuildingDao = BuildingDAO(Base)
+    # ring = ring_regular((19.921910, 50.037994), 5, 4, 45)
+    # multipolygon = MultiPolygon(Polygon(ring))
+    # multipolygon_record = ShapeSvc.create_multipolygon(multipolygon)
+    # BuildingDao.create(shape=multipolygon_record)
+    # ring = ring_regular((19.921710, 50.037994), 5, 4, 45)
+    # multipolygon = MultiPolygon(Polygon(ring))
+    # multipolygon_record = ShapeSvc.create_multipolygon(multipolygon)
+    # BuildingDao.create(shape=multipolygon_record)
 
 
 if __name__ == '__main__':

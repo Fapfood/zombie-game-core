@@ -6,5 +6,7 @@ class SearchZoneEntity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     search_zone_type_id = db.Column(db.Integer, db.ForeignKey('search_zone_type.id'))
     type = db.relationship('SearchZoneTypeEntity', backref='zones')
-    multipolygon_id = db.Column(db.Integer, db.ForeignKey('shape_multipolygon.id'))
+    long = db.Column(db.Float, nullable=False)
+    lat = db.Column(db.Float, nullable=False)
+    multipolygon_id = db.Column(db.Integer, db.ForeignKey('shape_multipolygon.id'), nullable=False)
     shape = db.relationship('ShapeMultiPolygonEntity')
