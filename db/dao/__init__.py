@@ -8,6 +8,7 @@ from .resource_pack import ResourcePackDAO
 from .resource_type import ResourceTypeDAO
 from .search_zone import SearchZoneDAO
 from .search_zone_action import SearchZoneActionDAO
+from .search_zone_action_type import SearchZoneActionTypeDAO
 from .search_zone_type import SearchZoneTypeDAO
 from .shape import ShapeMultiPolygonDAO
 from .shape import ShapePointDAO

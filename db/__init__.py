@@ -7,6 +7,7 @@ from .dao import ResourceDropProbabilityDAO
 from .dao import ResourcePackDAO
 from .dao import ResourceTypeDAO
 from .dao import SearchZoneActionDAO
+from .dao import SearchZoneActionTypeDAO
 from .dao import SearchZoneDAO
 from .dao import SearchZoneTypeDAO
 from .dao import ShapeMultiPolygonDAO
@@ -28,6 +29,7 @@ ResourceDropProbabilityDao = ResourceDropProbabilityDAO(db)
 ResourcePackDao = ResourcePackDAO(db)
 ResourceTypeDao = ResourceTypeDAO(db)
 SearchZoneActionDao = SearchZoneActionDAO(db)
+SearchZoneActionTypeDao = SearchZoneActionTypeDAO(db)
 SearchZoneDao = SearchZoneDAO(db)
 SearchZoneTypeDao = SearchZoneTypeDAO(db)
 ShapeMultiPolygonDao = ShapeMultiPolygonDAO(db)

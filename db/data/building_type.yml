@@ -4,9 +4,9 @@ list:
     worker_icon_male: '👷‍♂️'
     worker_icon_female: '👷‍♀️'
     available_productions:
-      - name: log1 to plank2
-      - name: log1 to plank3
-      - name: plank2 to shield1
+      - name: log 1 to plank 2
+      - name: log 1 to plank 3
+      - name: plank 2 to shield 1
   - name: generic1
     max_workers: 1
     worker_icon_male: '️'

@@ -1,71 +1,71 @@
 list:
-  - name: log1 to plank2
+  - name: log 1 to plank 2
     minutes: 15
     required_skills:
-      - name: carpentry2
+      - name: carpentry 2
         skills:
-          - name: carpentry2
+          - name: carpentry 2
             type:
               name: carpentry
             level: 2
     required_tools:
-      - name: saw1
+      - name: saw 1
         type:
           name: saw
         quantity: 1
     from_resources:
-      - name: log1
+      - name: log 1
         type:
           name: log
         quantity: 1
     to_resources_successful:
-      - name: plank2
+      - name: plank 2
         type:
           name: plank
         quantity: 2
     to_resources_interrupted: []
-  - name: log1 to plank3
+  - name: log 1 to plank 3
     minutes: 20
     required_skills:
-      - name: carpentry3
+      - name: carpentry 3
         skills:
-          - name: carpentry3
+          - name: carpentry 3
             type:
               name: carpentry
             level: 3
     required_tools:
-      - name: saw1
+      - name: saw 1
         type:
           name: saw
         quantity: 1
     from_resources:
-      - name: log1
+      - name: log 1
         type:
           name: log
         quantity: 1
     to_resources_successful:
-      - name: plank3
+      - name: plank 3
         type:
           name: plank
         quantity: 3
     to_resources_interrupted: []
-  - name: plank2 to shield1
+  - name: plank 2 to shield 1
     minutes: 20
     required_skills:
-      - name: carpentry2
+      - name: carpentry 2
         skills:
-          - name: carpentry2
+          - name: carpentry 2
             type:
               name: carpentry
             level: 2
     required_tools: []
     from_resources:
-      - name: plank2
+      - name: plank 2
         type:
           name: plank
         quantity: 2
     to_resources_successful:
-      - name: shield1
+      - name: shield 1
         type:
           name: shield
         quantity: 1

@@ -8,6 +8,7 @@ from .resource_pack import ResourcePackEntity
 from .resource_type import ResourceTypeEntity
 from .search_zone import SearchZoneEntity
 from .search_zone_action import SearchZoneActionEntity
+from .search_zone_action_type import SearchZoneActionTypeEntity
 from .search_zone_type import SearchZoneTypeEntity
 from .shape import ShapeMultiPolygonEntity
 from .shape import ShapePointEntity

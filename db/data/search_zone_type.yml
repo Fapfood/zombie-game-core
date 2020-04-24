@@ -1,9 +1,20 @@
 list:
   - name: car
     resource_drop_table:
-      - name: bottle of water
+      - name: bottle of water 100
+        type:
+          name: bottle of water
         probability: 100
-      - name: bottle of water
+      - name: bottle of water 60
+        type:
+          name: bottle of water
         probability: 60
-      - name: fire extinguisher
+      - name: fire extinguisher 90
+        type:
+          name: fire extinguisher
         probability: 90
+    search_zone_action_types:
+      - name: search
+        required_number_of_people: 1
+        required_skills: []
+        required_tools: []
