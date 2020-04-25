@@ -5,16 +5,13 @@ from yaml import load, FullLoader
 
 from db import ProductionTypeDAO, ResourceTypeDAO, ResourcePackDAO, SkillTypeDAO, SkillLevelDAO, SkillPackDAO, \
     BuildingTypeDAO, ResourceDAO, SkillDAO, PersonDAO, BuildingDAO, SearchZoneDAO, SearchZoneTypeDAO, \
-    SearchZoneActionTypeDAO, ResourceDropProbabilityDAO
-from db import ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, ShapeMultiPolygonDAO
+    SearchZoneActionTypeDAO, ResourceDropProbabilityDAO, ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, \
+    ShapeMultiPolygonDAO
 from db.entity import SkillTypeEntity, ResourceTypeEntity
+from db.model import BuildingType, ProductionType, SearchZoneType
 from service import ProductionService, SkillService, BuildingService, ShapeService, ResourceService, PersonService, \
     SearchZoneService
-from service.model.building import BuildingType
-from service.model.production import ProductionType
-from service.model.search_zone import SearchZoneType
-from service.model.shape import Polygon, MultiPolygon
-from service.shape_helper import ring_regular
+from service.shape_helper import Polygon, MultiPolygon, ring_regular
 
 
 def migration():
