@@ -1,5 +1,8 @@
 from ..base_dao import BaseDAO
-from ..entity import ShapePointEntity, ShapeRingEntity, ShapePolygonEntity, ShapeMultiPolygonEntity
+from ..entity import ShapeMultiPolygonEntity
+from ..entity import ShapePointEntity
+from ..entity import ShapePolygonEntity
+from ..entity import ShapeRingEntity
 
 
 class ShapePointDAO(BaseDAO):

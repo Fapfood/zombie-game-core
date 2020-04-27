@@ -4,13 +4,13 @@ from sqlalchemy.orm import sessionmaker
 from yaml import load, FullLoader
 
 from db import ProductionTypeDAO, ResourceTypeDAO, ResourcePackDAO, SkillTypeDAO, SkillLevelDAO, SkillPackDAO, \
-    BuildingTypeDAO, ResourceDAO, SkillDAO, PersonDAO, BuildingDAO, SearchZoneDAO, SearchZoneTypeDAO, \
-    SearchZoneActionTypeDAO, ResourceDropProbabilityDAO, ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, \
+    BuildingTypeDAO, ResourceDAO, SkillDAO, PersonDAO, BuildingDAO, SearchRoomDAO, SearchRoomTypeDAO, \
+    SearchRoomActionTypeDAO, ResourceDropProbabilityDAO, ShapePointDAO, ShapeRingDAO, ShapePolygonDAO, \
     ShapeMultiPolygonDAO
 from db.entity import SkillTypeEntity, ResourceTypeEntity
-from db.model import BuildingType, ProductionType, SearchZoneType
+from db.model import BuildingType, ProductionType, SearchRoomType
 from service import ProductionService, SkillService, BuildingService, ShapeService, ResourceService, PersonService, \
-    SearchZoneService
+    SearchRoomService
 from service.shape_helper import Polygon, MultiPolygon, ring_regular
 
 
@@ -47,7 +47,7 @@ def migration():
     ProductionSvc = ProductionService(ProductionTypeDAO(Base), ResourceSvc, SkillSvc)
     BuildingSvc = BuildingService(BuildingTypeDAO(Base), ProductionSvc)
     PersonSvc = PersonService(PersonDAO(Base), SkillTypeDAO(Base), SkillDAO(Base))
-    SearchZoneSvc = SearchZoneService(SearchZoneActionTypeDAO(Base), SearchZoneTypeDAO(Base), SearchZoneDAO(Base),
+    SearchRoomSvc = SearchRoomService(SearchRoomActionTypeDAO(Base), SearchRoomTypeDAO(Base), SearchRoomDAO(Base),
                                       ResourceSvc, SkillSvc)
 
     with open('data/production_type.yml', encoding='utf8') as f:
@@ -62,11 +62,11 @@ def migration():
     for elem in file:
         BuildingSvc.get_or_create_building_type(BuildingType.from_yaml(elem))
 
-    with open('data/search_zone_type.yml', encoding='utf8') as f:
+    with open('data/search_room_type.yml', encoding='utf8') as f:
         file = load(f.read(), Loader=FullLoader)['list']
 
     for elem in file:
-        SearchZoneSvc.get_or_create_search_zone_type(SearchZoneType.from_yaml(elem))
+        SearchRoomSvc.get_or_create_search_room_type(SearchRoomType.from_yaml(elem))
 
     def only_once_migration():
         ResourceDao = ResourceDAO(Base)
@@ -98,7 +98,7 @@ def migration():
         ring = ring_regular(point, 10, 10)
         multipolygon = MultiPolygon(Polygon(ring))
         multipolygon_record = ShapeSvc.create_multipolygon(multipolygon)
-        SearchZoneSvc.generate_search_zone(shape=multipolygon_record, long=point[0], lat=point[1])
+        SearchRoomSvc.generate_search_room(shape=multipolygon_record, long=point[0], lat=point[1])
 
     only_once_migration()
 

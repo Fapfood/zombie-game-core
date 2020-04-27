@@ -1,0 +1,2 @@
+class SearchRoomBlank:
+    pass

@@ -1,5 +1,6 @@
 from ..base_dao import BaseDAO
-from ..entity import SkillLevelEntity, SkillTypeEntity
+from ..entity import SkillLevelEntity
+from ..entity import SkillTypeEntity
 
 
 class SkillLevelDAO(BaseDAO):

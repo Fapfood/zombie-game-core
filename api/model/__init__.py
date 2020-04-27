@@ -7,6 +7,7 @@ from .resource_pack import ResourcePackModelCompact
 from .resource_pack import ResourcePackModelFull
 from .resource_pack import ResourcePackModelSimple
 from .resource_type import ResourceTypeModelSimple
+from .search_room import SearchRoomModel
 from .shape import ShapeMultiPolygonModel
 from .shape import ShapePointModel
 from .shape import ShapePolygonModel

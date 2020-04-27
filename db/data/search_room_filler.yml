@@ -1,0 +1,54 @@
+list:
+  - name: car cabin 1
+    type:
+      name: car cabin
+    resource_drop_table:
+      - name: bottle of water 1.00
+        type:
+          name: bottle of water
+        probability: 1.00
+      - name: bottle of water 0.60
+        type:
+          name: bottle of water
+        probability: 0.60
+      - name: fire extinguisher 0.90
+        type:
+          name: fire extinguisher
+        probability: 0.90
+      - name: bag of chips 0.50
+        type:
+          name: bag of chips
+        probability: 0.50
+      - name: battery 0.90
+        type:
+          name: battery
+        probability: 0.90
+      - name: can with soda 0.80
+        type:
+          name: can with soda
+        probability: 0.80
+      - name: skirt 0.20
+        type:
+          name: skirt
+        probabity: 0.20
+    search_space_action_types:
+      - name: search in the front seats
+        probability: 0.30
+      - name: search in the back seats
+        probability: 0.40
+      - name: search under the seats
+        probability: 0.20
+  - name: car cabin 2
+    type:
+      name: car cabin
+    resource_drop_table:
+      - name: bottle of coke 0.90
+        type:
+          name: bottle of coke
+        probability: 0.90
+    search_space_action_types: []
+  - name: car trunk 1
+    type:
+      name: car trunk
+    resource_drop_table: []
+    search_space_action_types: []

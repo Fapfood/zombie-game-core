@@ -1,5 +1,6 @@
 from ..base_dao import BaseDAO
-from ..entity import ResourceTypeEntity, ResourcePackEntity
+from ..entity import ResourcePackEntity
+from ..entity import ResourceTypeEntity
 
 
 class ResourcePackDAO(BaseDAO):
