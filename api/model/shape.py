@@ -21,5 +21,5 @@ ShapePolygonModel = Model('ShapePolygon', {
 
 ShapeMultiPolygonModel = Model('ShapeMultiPolygon', {
     'id': fields.Integer(required=True),
-    'polygons': fields.List(cls_or_instance=fields.Nested(ShapePolygonModel), required=True),
+    'polygons': fields.List(fields.Nested(ShapePolygonModel), required=True),
 })

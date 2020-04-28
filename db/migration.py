@@ -35,6 +35,7 @@ from db.model import BuildingType
 from db.model import ProductionType
 from db.model import ResourceType
 from db.model import SearchRoomFiller
+from db.model import SearchRoomType
 from db.model import SkillType
 from service.shape_helper import Polygon, MultiPolygon, ring_regular
 from service.type import BuildingService
@@ -43,12 +44,14 @@ from service.type import ResourceService
 from service.type import SearchRoomService
 from service.type import SkillService
 
+DB_STRING = 'sqlite:////Users/matr/dev/zombie-game-core/test.db'
 
-def migration():
-    engine = create_engine('sqlite:////Users/matr/dev/zombie-game-core/test.db')
-    Base = declarative_base()
+
+def type_migration():
+    engine = create_engine(DB_STRING)
     Session = sessionmaker(bind=engine)
     session = Session()
+    Base = declarative_base()
     Base.session = session
 
     BuildingTypeDao = BuildingTypeDAO(Base)
@@ -94,6 +97,11 @@ def migration():
     for el in lis:
         BuildingSvc.get_or_create_building_type(BuildingType.from_yaml(el))
 
+    with open('data/search_room_type.yml', encoding='utf8') as f:
+        lis = load(f.read(), Loader=FullLoader)['list']
+    for el in lis:
+        SearchRoomSvc.get_or_create_search_room_type(SearchRoomType.from_yaml(el))
+
     with open('data/search_room_filler.yml', encoding='utf8') as f:
         lis = load(f.read(), Loader=FullLoader)['list']
     for el in lis:
@@ -115,7 +123,6 @@ def only_once_migration():
     ShapeRingDao = ShapeRingDAO(Base)
     SkillDao = SkillDAO(Base)
 
-    ResourceDao = ResourceDAO(Base)
     ResourceDao.create(resource_type_id=8, quality=100, decay=0, owned=True)
     ResourceDao.create(resource_type_id=9, quality=90, decay=0, owned=True)
     ResourceDao.create(resource_type_id=9, quality=100, decay=0, owned=True)
@@ -128,7 +135,6 @@ def only_once_migration():
 
     PersonSvc.generate_person(19.921310, 50.038194, icon='🧟‍♂️')
 
-    BuildingDao = BuildingDAO(Base)
     point = (19.921910, 50.037994)
     ring = ring_regular(point, 5, 4, 45)
     multipolygon = MultiPolygon(Polygon(ring))
@@ -148,4 +154,4 @@ def only_once_migration():
 
 
 if __name__ == '__main__':
-    migration()
+    type_migration()
