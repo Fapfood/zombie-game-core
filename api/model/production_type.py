@@ -4,17 +4,12 @@ from .resource_pack import ResourcePackModelFull as ResourcePackModel
 from .skill_pack import SkillPackModelFull as SkillPackModel
 
 ProductionTypeModel = Model('ProductionType', {
-    'id': fields.Integer(required=True, description='Production type id'),
-    'name': fields.String(required=True, description='Production type name'),
-    'minutes': fields.Integer(required=True, description='Production time in minutes'),
-    'required_skills': fields.List(required=False, cls_or_instance=fields.Nested(SkillPackModel),
-                                   description='Skill packs'),
-    'required_tools': fields.List(required=False, cls_or_instance=fields.Nested(ResourcePackModel),
-                                  description='Tools packs'),
-    'from_resources': fields.List(required=False, cls_or_instance=fields.Nested(ResourcePackModel),
-                                  description='Left resource packs'),
-    'to_resources_successful': fields.List(required=False, cls_or_instance=fields.Nested(ResourcePackModel),
-                                           description='Right resource packs after success'),
-    'to_resources_interrupted': fields.List(required=False, cls_or_instance=fields.Nested(ResourcePackModel),
-                                            description='Right resource packs after failure')
+    'id': fields.Integer(required=True),
+    'name': fields.String(required=True),
+    'minutes': fields.Integer(required=True),
+    'required_skills': fields.List(fields.Nested(SkillPackModel), required=False),
+    'required_tools': fields.List(fields.Nested(ResourcePackModel), required=False),
+    'from_resources': fields.List(fields.Nested(ResourcePackModel), required=False),
+    'to_resources_successful': fields.List(fields.Nested(ResourcePackModel), required=False),
+    'to_resources_interrupted': fields.List(fields.Nested(ResourcePackModel), required=False),
 })
