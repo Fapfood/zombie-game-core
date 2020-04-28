@@ -30,8 +30,8 @@ list:
       - name: skirt 0.20
         type:
           name: skirt
-        probabity: 0.20
-    search_space_action_types:
+        probability: 0.20
+    search_room_action_types:
       - name: search in the front seats
         probability: 0.30
       - name: search in the back seats
@@ -46,9 +46,9 @@ list:
         type:
           name: bottle of coke
         probability: 0.90
-    search_space_action_types: []
+    search_room_action_types: []
   - name: car trunk 1
     type:
       name: car trunk
     resource_drop_table: []
-    search_space_action_types: []
+    search_room_action_types: []
