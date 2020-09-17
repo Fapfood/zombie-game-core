@@ -1,6 +1,6 @@
 from ..database import db
 
 
-class ProductionEntity(db.Model):
-    __tablename__ = 'production'
+class ZoneDoorEntity(db.Model):
+    __tablename__ = 'zone_door'
     id = db.Column(db.Integer, primary_key=True)
