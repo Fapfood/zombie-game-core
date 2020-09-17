@@ -10,8 +10,8 @@ class ResourceDAO(BaseDAO):
         objs = self.db.session.query(self.class_entity).filter(self.class_entity.name.in_(names)).all()
         return objs
 
-    def read_all_by_type_id(self, id):
+    def read_all_by_type(self, name):
         # obj = self.db.session.query(self.class_entity).join(ResourceTypeEntity).filter(
         #     ResourceTypeEntity.id == id).all()
-        obj = self.db.session.query(self.class_entity).filter_by(resource_type_id=id).all()
-        return obj
+        objs = self.db.session.query(self.class_entity).filter_by(type=name).all()
+        return objs
