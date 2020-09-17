@@ -1,12 +1,19 @@
-from db import PersonDao, ProductionDao, SearchZoneDao, SearchZoneTypeDao, \
-    ShapePointDao, ShapeRingDao, ShapePolygonDao, ShapeMultiPolygonDao, \
-    ResourceDao, ResourceTypeDao, ResourcePackDao, SkillLevelDao, SkillTypeDao
+from db import PersonDao
+from db import ResourceDao
+from db import ShapeMultiPolygonDao
+from db import ShapePointDao
+from db import ShapePolygonDao
+from db import ShapeRingDao
+from db import SkillDao
+from db import ZoneRoomDao
 from .person import PersonService
-from .production import ProductionService
-from .search_zone import SearchZoneService
+from .resource import ResourceService
 from .shape import ShapeService
+from .skill import SkillService
+from .zone_room import ZoneRoomService
 
-PersonSvc = PersonService(PersonDao, SkillTypeDao, SkillLevelDao)
-ProductionSvc = ProductionService(ProductionDao, ResourceTypeDao, ResourcePackDao, SkillTypeDao, SkillLevelDao)
-SearchZoneSvc = SearchZoneService(SearchZoneTypeDao, SearchZoneDao, ResourceTypeDao, ResourceDao)
+SkillSvc = SkillService(SkillDao)
+PersonSvc = PersonService(PersonDao, SkillSvc)
 ShapeSvc = ShapeService(ShapePointDao, ShapeRingDao, ShapePolygonDao, ShapeMultiPolygonDao)
+ResourceSvc = ResourceService(ResourceDao)
+ZoneRoomSvc = ZoneRoomService(ZoneRoomDao, ResourceSvc)

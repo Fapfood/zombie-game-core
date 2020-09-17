@@ -1,5 +1,6 @@
 from .building import BuildingDAO
 from .person import PersonDAO
+from .production import ProductionDAO
 from .resource import ResourceDAO
 from .shape import ShapeMultiPolygonDAO
 from .shape import ShapePointDAO
@@ -11,4 +12,3 @@ from .zone_action import ZoneActionDAO
 from .zone_door import ZoneDoorDAO
 from .zone_room import ZoneRoomDAO
 from .zone_room_action import ZoneRoomActionDAO
-from .zone_type import ZoneTypeDAO

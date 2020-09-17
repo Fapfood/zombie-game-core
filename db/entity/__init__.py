@@ -1,5 +1,6 @@
 from .building import BuildingEntity
 from .person import PersonEntity
+from .production import ProductionEntity
 from .resource import ResourceEntity
 from .shape import ShapeMultiPolygonEntity
 from .shape import ShapePointEntity
@@ -11,4 +12,3 @@ from .zone_action import ZoneActionEntity
 from .zone_door import ZoneDoorEntity
 from .zone_room import ZoneRoomEntity
 from .zone_room_action import ZoneRoomActionEntity
-from .zone_type import ZoneTypeEntity
