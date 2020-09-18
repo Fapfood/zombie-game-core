@@ -15,6 +15,7 @@ class PersonEntity(db.Model):
     age = db.Column(db.Integer, nullable=False)
     base_icon = db.Column(db.String(1), nullable=False)
     temp_icon = db.Column(db.String(1))
+    owned = db.Column(db.Boolean, nullable=False, default=False)
     attitude = db.Column(db.Integer, nullable=False)
     long = db.Column(db.Float, nullable=False)
     lat = db.Column(db.Float, nullable=False)

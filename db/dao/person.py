@@ -13,3 +13,7 @@ class PersonDAO(BaseDAO):
     def read_all_by_building_id(self, id):
         objs = self.db.session.query(self.class_entity).filter_by(building_id=id).all()
         return objs
+
+    def read_all_owned(self):
+        objs = self.db.session.query(self.class_entity).filter_by(owned=True).all()
+        return objs

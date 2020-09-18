@@ -9,8 +9,7 @@ association_table = db.Table('resource_x_zone_room', db.Model.metadata,
 class ZoneRoomEntity(db.Model):
     __tablename__ = 'zone_room'
     id = db.Column(db.Integer, primary_key=True)
-    zone_room_type_id = db.Column(db.Integer, db.ForeignKey('zone_room_type.id'))
-    type = db.relationship('ZoneRoomTypeEntity', backref='zones')
+    type = db.Column(db.String, nullable=False)
     long = db.Column(db.Float, nullable=False)
     lat = db.Column(db.Float, nullable=False)
     multipolygon_id = db.Column(db.Integer, db.ForeignKey('shape_multipolygon.id'), nullable=False)

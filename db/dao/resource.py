@@ -15,3 +15,7 @@ class ResourceDAO(BaseDAO):
         #     ResourceTypeEntity.id == id).all()
         objs = self.db.session.query(self.class_entity).filter_by(type=name).all()
         return objs
+
+    def read_all_owned(self):
+        objs = self.db.session.query(self.class_entity).filter_by(owned=True).all()
+        return objs
