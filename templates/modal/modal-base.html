@@ -1,0 +1,21 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header" id="{{ modal_id }}-header">
+            {% block modal_header %}
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">{{ title }}</h2>
+            {% endblock %}
+        </div>
+        <div class="modal-body" id="{{ modal_id }}-body">
+            {% block modal_body %}
+            {% endblock %}
+        </div>
+        <div class="modal-footer" id="{{ modal_id }}-footer">
+            {% block modal_footer %}
+                <button data-dismiss="modal">Close</button>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% block modal_script %}
+{% endblock %}
