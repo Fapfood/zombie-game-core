@@ -1,0 +1,6 @@
+<div class="modal-body" id="{{ modal_id }}-body">
+    <pre id="{{ modal_id }}-json" style="text-align: left" align="left"></pre>
+    <script type="text/javascript">
+        document.getElementById('{{ modal_id }}-json').textContent = JSON.stringify({{ json_message }}, undefined, 2);
+    </script>
+</div>
