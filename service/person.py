@@ -7,7 +7,7 @@ class PersonService:
         self.person_dao = person_dao
         self.skill_svc = skill_svc
 
-    def generate_person(self, long, lat, icon=None):
+    def generate_person(self, long, lat, icon=None, owned=False):
         gender = generate_gender()
         age = generate_age()
         skills = self.skill_svc.generate_skills(3, (2, 1))
@@ -17,6 +17,7 @@ class PersonService:
                                         gender=gender,
                                         age=age,
                                         base_icon=icon,
+                                        owned=owned,
                                         attitude=generate_attitude(),
                                         long=long,
                                         lat=lat,

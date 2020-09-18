@@ -20,7 +20,7 @@ class SkillService:
 
     @staticmethod
     def _get_sample_skill_types(n):
-        all_types = skill_static_service.get_all()
+        all_types = skill_static_service.get_all_names()
         skills = sample(all_types, n)
         return skills
 

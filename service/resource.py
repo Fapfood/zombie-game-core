@@ -9,16 +9,17 @@ class ResourceService:
         res = []
         for el in drop_probability_lis:
             if random() <= el.probability:
-                entity = self.generate_resource(el.type)
+                entity = self.generate_resource(el.resource)
                 res.append(entity)
         return res
 
-    def generate_resource(self, type):
-        available = False
-        owned = False
+    def generate_resource(self, type, owned=False):
+        owned = owned
+        available = owned
         quality = randint(50, 100)
         decay = randint(0, 50)
-        entity = self.resource_dao.create(available=available, owned=owned, quality=quality, decay=decay, type=type)
+        entity = self.resource_dao.create(available=available, owned=owned, quality=quality, decay=decay,
+                                          type=type.name, icon=type.icon)
         return entity
 
     @staticmethod
