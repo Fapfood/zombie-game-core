@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    $('#{{ button_id }}').on('click', function () {
+        $('#{{ modal_id }}').load('{{ url_path }}', function () {
+            $('#{{ modal_id }}').modal('show');
+        });
+    });
+</script>
