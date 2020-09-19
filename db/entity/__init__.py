@@ -1,4 +1,5 @@
 from .building import BuildingEntity
+from .building_room import BuildingRoomEntity
 from .person import PersonEntity
 from .production import ProductionEntity
 from .resource import ResourceEntity

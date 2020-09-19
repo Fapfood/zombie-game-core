@@ -1,4 +1,5 @@
 from .dao import BuildingDAO
+from .dao import BuildingRoomDAO
 from .dao import PersonDAO
 from .dao import ProductionDAO
 from .dao import ResourceDAO
@@ -15,6 +16,7 @@ from .dao import ZoneRoomDAO
 from .database import db
 
 BuildingDao = BuildingDAO(db)
+BuildingRoomDao = BuildingRoomDAO(db)
 PersonDao = PersonDAO(db)
 ProductionDao = ProductionDAO(db)
 ResourceDao = ResourceDAO(db)

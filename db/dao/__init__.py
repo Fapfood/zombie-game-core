@@ -1,4 +1,5 @@
 from .building import BuildingDAO
+from .building_room import BuildingRoomDAO
 from .person import PersonDAO
 from .production import ProductionDAO
 from .resource import ResourceDAO

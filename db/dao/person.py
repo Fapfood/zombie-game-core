@@ -10,8 +10,8 @@ class PersonDAO(BaseDAO):
         objs = self.db.session.query(self.class_entity).filter(self.class_entity.name.in_(names)).all()
         return objs
 
-    def read_all_by_building_id(self, id):
-        objs = self.db.session.query(self.class_entity).filter_by(building_id=id).all()
+    def read_all_by_building_room_id(self, id):
+        objs = self.db.session.query(self.class_entity).filter_by(building_room_id=id).all()
         return objs
 
     def read_all_owned(self):
