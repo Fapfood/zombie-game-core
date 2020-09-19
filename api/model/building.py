@@ -1,12 +1,8 @@
 from flask_restplus import Model, fields
 
-from .building_type import BuildingTypeModelSimple as BuildingTypeModel
-from .person import PersonModel as PersonModel
-from .production_type import ProductionTypeModel as ProductionTypeModel
+from .building_room import BuildingRoomModel
 
 BuildingModel = Model('Building', {
     'id': fields.Integer(required=True),
-    'type': fields.Nested(BuildingTypeModel, required=False),
-    'production_type': fields.Nested(ProductionTypeModel, required=False),
-    'workers': fields.List(fields.Nested(PersonModel), required=False),
+    'rooms': fields.List(fields.Nested(BuildingRoomModel), required=True),
 })

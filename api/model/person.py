@@ -1,6 +1,6 @@
 from flask_restplus import Model, fields
 
-from .skill import SkillModelFull as SkillModel
+from .skill import SkillModel
 
 PersonModel = Model('Person', {
     'id': fields.Integer(required=True),
