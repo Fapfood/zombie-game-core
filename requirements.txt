@@ -5,3 +5,5 @@ flask~=1.1.2
 shapely~=1.7.0
 names~=0.3.0
 numpy~=1.18.1
+OSMPythonTools
+pyproj
