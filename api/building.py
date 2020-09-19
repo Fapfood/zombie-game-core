@@ -1,8 +1,8 @@
-from flask_restplus import Namespace, Resource, marshal
+from flask_restplus import Namespace, Resource
 
 from service import BuildingRoomSvc
 from service import BuildingSvc
-from view.decorator import modal_result
+from view.decorator import modal_body_with
 from .model import BuildingModel
 from .model import BuildingRoomModel
 
@@ -35,7 +35,7 @@ class Building(Resource):
         return BuildingSvc.read_by_id(id)
 
     @api.doc('update by given id')
-    @modal_result
+    @modal_body_with(BuildingModel)
     def post(self, id):
         args = parser.parse_args()
         room_id = args.get('room_id')
@@ -64,12 +64,14 @@ class BuildingRoom(Resource):
         return BuildingRoomSvc.read_by_id(room_id)
 
     @api.doc('update by given id')
-    @modal_result
+    @modal_body_with(BuildingRoomModel)
     def post(self, id, room_id):
         args = parser.parse_args()
         building_type_id = args.get('building_type_id')
         production_type_id = args.get('production_type_id')
         workers = args.get('worker') if args.get('worker') is not None else []
 
-        result = BuildingRoomSvc.update_by_id(room_id, building_type_id, production_type_id, workers)
-        return marshal(result, BuildingRoomModel, skip_none=True)
+        result = BuildingRoomSvc.update_by_id(room_id, building_type_id=building_type_id,
+                                              production_type_id=production_type_id,
+                                              workers=workers)
+        return result

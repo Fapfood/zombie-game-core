@@ -1,7 +1,7 @@
-from flask_restplus import Namespace, Resource, marshal
+from flask_restplus import Namespace, Resource
 
 from service import ProductionSvc
-from view.decorator import modal_result
+from view.decorator import modal_body_with
 from .model import ProductionModel
 
 api = Namespace('production')
@@ -22,7 +22,7 @@ class ProductionList(Resource):
         return ProductionSvc.read_all()
 
     @api.doc('create')
-    @modal_result
+    @modal_body_with(ProductionModel)
     def post(self):
         args = parser.parse_args()
         type = args.get('type')
@@ -31,4 +31,4 @@ class ProductionList(Resource):
         resources = args.get('resource') if args.get('resource') is not None else []
 
         result = ProductionSvc.start_production(type, workers=workers, tools=tools, resources=resources)
-        return marshal(result, ProductionModel, skip_none=True)
+        return result
