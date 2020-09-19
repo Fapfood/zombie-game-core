@@ -1,13 +1,17 @@
 from zombie_game_type import building_static_service
 
-from db import PersonDao
+from service import BuildingService
+from service import PersonService
 from view.display import render_part
 
 
 class BuildingController:
-    def __init__(self, building_service, building_room_service, map):
+    def __init__(self,
+                 building_service: BuildingService,
+                 person_service: PersonService,
+                 map):
         self.building_service = building_service
-        self.building_room_service = building_room_service
+        self.person_service = person_service
         self.map = map
 
     def intersection(self, player):
@@ -128,8 +132,8 @@ class BuildingController:
         if room.type is None:
             return self._type_not_assigned_message(title)
 
-        persons = PersonDao.read_all_owned()
-        assigned_persons = PersonDao.read_all_by_building_room_id(room.id)
+        persons = self.person_service.read_all_owned_and_available()
+        assigned_persons = room.workers
         groups = [
             {
                 'id': i,
@@ -171,30 +175,30 @@ class BuildingController:
     def _line_not_assigned_message(self, title):
         return self._red_message(title=title, message='Production type not assigned to this room.')
 
-    def _workers_not_assigned_message(self, title, type):
-        return self._red_message(title=title, message='Workers not assigned to this {}.'.format(type))
+    def _workers_not_assigned_message(self, title):
+        return self._red_message(title=title, message='Workers not assigned to this room.')
 
     @staticmethod
     def _room_focused_message(title, url, groups):
-        return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
+        return render_part(template='modal/modal-form.html', modal_id='common-modal',
                            title=title, button_text='Focus', http_method='POST',
                            action_url=url, groups=groups)
 
     @staticmethod
     def _type_assigned_message(title, url, groups):
-        return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
+        return render_part(template='modal/modal-form.html', modal_id='common-modal',
                            title=title, button_text='Assign', http_method='POST',
                            action_url=url, groups=groups)
 
     @staticmethod
     def _line_assigned_message(title, url, groups):
-        return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
+        return render_part(template='modal/modal-form.html', modal_id='common-modal',
                            title=title, button_text='Assign', http_method='POST',
                            action_url=url, groups=groups)
 
     @staticmethod
     def _workers_assigned_message(title, url, groups):
-        return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
+        return render_part(template='modal/modal-form.html', modal_id='common-modal',
                            title=title, button_text='Assign', http_method='POST',
                            action_url=url, groups=groups)
 
