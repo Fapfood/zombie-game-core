@@ -5,42 +5,73 @@ from view.display import render_part
 
 
 class BuildingController:
-    def __init__(self, building_service, map):
-        self.building_dao = building_service
+    def __init__(self, building_service, building_room_service, map):
+        self.building_service = building_service
+        self.building_room_service = building_room_service
         self.map = map
 
     def intersection(self, player):
         building_plot = self.map.building_interaction(player.pos)
         return building_plot
 
-    def interact_with(self, player):
+    def inspect(self, player):
         building_plot = self.intersection(player)
         title = 'Interact'
 
         if building_plot is None:
-            return self._room_not_found_message(title)
+            return self._building_not_found_message(title)
 
-        building = self.building_dao.read_by_id(building_plot.id)
-        if building.type is None:
-            return self._type_not_assigned_message(title)
+        building = self.building_service.read_by_id(building_plot.id)
+        room = building.focused_on
 
-        if building.production_type is None:
-            return self._line_not_assigned_message(title)
+        if room is None:
+            return self._inspected_message(title)
 
-        if len(building.workers) == 0:
-            return self._workers_not_assigned_message(title, building.type)
+        if room.type is None:
+            return self._inspected_message(title, room.id)
 
-        workers = ', '.join(['{} {}'.format(w.first_name, w.last_name) for w in building.workers])
-        return self._workers_assigned_message(title, workers, building.type)
+        if room.production_type is None:
+            return self._inspected_message(title, room.id, room.type)
+
+        if len(room.workers) == 0:
+            return self._inspected_message(title, room.id, room.type, room.production_type)
+
+        workers = ', '.join(['{} {}'.format(w.first_name, w.last_name) for w in room.workers])
+        return self._inspected_message(title, room.id, room.type, room.production_type, workers)
+
+    def focus_on(self, player):
+        building_plot = self.intersection(player)
+        title = 'Focus'
+
+        if building_plot is None:
+            return self._building_not_found_message(title)
+
+        building = self.building_service.read_by_id(building_plot.id)
+        room = building.focused_on
+
+        rooms = building.rooms
+        groups = [
+            {'id': 0,
+             'parameter': 'room_id',
+             'label': 'Room:',
+             'choices': [{'id': el.id, 'name': '{}: {}'.format(el.id, el.type if el.type is not None else 'empty'),
+                          'selected': room == el} for el in rooms],
+             },
+        ]
+        return self._room_focused_message(title, '/building/{}'.format(building.id), groups)
 
     def assign_type_to(self, player):
         building_plot = self.intersection(player)
         title = 'Assign type to room'
 
         if building_plot is None:
-            return self._room_not_found_message(title)
+            return self._building_not_found_message(title)
 
-        building = self.building_dao.read_by_id(building_plot.id)
+        building = self.building_service.read_by_id(building_plot.id)
+        room = building.focused_on
+
+        if room is None:
+            return self._not_focused_on_room_message(title)
 
         building_types = building_static_service.get_all()
         groups = [
@@ -48,47 +79,57 @@ class BuildingController:
              'parameter': 'building_type_id',
              'label': 'Building type:',
              'choices': [{'id': el.name, 'name': el.name,
-                          'selected': building.type == el} for el in building_types],
+                          'selected': room.type == el} for el in building_types],
              },
         ]
-        return self._type_assigned_message(title, '/building/{}'.format(building.id), groups)
+        return self._type_assigned_message(title, '/building/{}/room/{}'.format(building.id, room.id), groups)
 
     def assign_line_to(self, player):
         building_plot = self.intersection(player)
         title = 'Assign production type to room'
 
         if building_plot is None:
-            return self._room_not_found_message(title)
+            return self._building_not_found_message(title)
 
-        building = self.building_dao.read_by_id(building_plot.id)
-        if building.type is None:
+        building = self.building_service.read_by_id(building_plot.id)
+        room = building.focused_on
+
+        if room is None:
+            return self._not_focused_on_room_message(title)
+
+        if room.type is None:
             return self._type_not_assigned_message(title)
 
-        production_types = building_static_service.get_by_name(building.type).available_productions
+        production_types = building_static_service.get_by_name(room.type).available_productions
         groups = [
             {
                 'id': 0,
                 'parameter': 'production_type_id',
                 'label': 'Production type:',
                 'choices': [{'id': el.name, 'name': el.name,
-                             'selected': building.production_type == el} for el in production_types],
+                             'selected': room.production_type == el} for el in production_types],
             },
         ]
-        return self._type_assigned_message(title, '/building/{}'.format(building.id), groups)
+        return self._type_assigned_message(title, '/building/{}/room/{}'.format(building.id, room.id), groups)
 
     def assign_workers_to(self, player):
         building_plot = self.intersection(player)
         title = 'Assign workers to room'
 
         if building_plot is None:
-            return self._room_not_found_message(title)
+            return self._building_not_found_message(title)
 
-        building = self.building_dao.read_by_id(building_plot.id)
-        if building.type is None:
+        building = self.building_service.read_by_id(building_plot.id)
+        room = building.focused_on
+
+        if room is None:
+            return self._not_focused_on_room_message(title)
+
+        if room.type is None:
             return self._type_not_assigned_message(title)
 
-        persons = PersonDao.read_all()
-        assigned_persons = PersonDao.read_all_by_building_id(building.id)
+        persons = PersonDao.read_all_owned()
+        assigned_persons = PersonDao.read_all_by_building_room_id(room.id)
         groups = [
             {
                 'id': i,
@@ -97,24 +138,47 @@ class BuildingController:
                 'choices': [{'id': el.id, 'name': '{} {}'.format(el.first_name, el.last_name),
                              'selected': len(assigned_persons) > i and assigned_persons[i] == el} for el in persons],
             }
-            for i in range(building_static_service.get_by_name(building.type).max_workers)
+            for i in range(building_static_service.get_by_name(room.type).max_workers)
         ]
-        return self._workers_assigned_message2(title, '/building/{}'.format(building.id), groups)
+        return self._workers_assigned_message(title, '/building/{}/room/{}'.format(building.id, room.id), groups)
 
-    def _room_not_found_message(self, title):
-        return self._red_message(title=title, message='Room to interact with NOT found.')
+    def _building_not_found_message(self, title):
+        return self._red_message(title=title, message='Building to interact with NOT found.')
+
+    def _inspected_message(self, title, focused_on_id=None, type=None, line=None, workers=None):
+        message = ''
+        if focused_on_id is None:
+            message += 'Building is not focused on any room.'
+        else:
+            message += 'Building is currently focused on room {}.'.format(focused_on_id)
+            if type is None:
+                message += '</br>Type not assigned to this room.'
+            else:
+                if line is None:
+                    message += '</br>Production type not assigned to this {}.'.format(type)
+                else:
+                    message += '</br>Production type {} is assigned to this {}.'.format(line, type)
+                if workers is not None:
+                    message += '</br>{} are assigned to work in this {}.'.format(workers, type)
+        return self._green_message(title=title, message=message)
+
+    def _not_focused_on_room_message(self, title):
+        return self._red_message(title=title, message='Building is not focused on any room.')
 
     def _type_not_assigned_message(self, title):
         return self._red_message(title=title, message='Type not assigned to this room.')
 
     def _line_not_assigned_message(self, title):
-        return self._green_message(title=title, message='Production type not assigned to this room.')
+        return self._red_message(title=title, message='Production type not assigned to this room.')
 
     def _workers_not_assigned_message(self, title, type):
-        return self._green_message(title=title, message='Workers not assigned to this {}.'.format(type))
+        return self._red_message(title=title, message='Workers not assigned to this {}.'.format(type))
 
-    def _workers_assigned_message(self, title, workers, type):
-        return self._green_message(title=title, message='{} are assigned to work in this {}.'.format(workers, type))
+    @staticmethod
+    def _room_focused_message(title, url, groups):
+        return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
+                           title=title, button_text='Focus', http_method='POST',
+                           action_url=url, groups=groups)
 
     @staticmethod
     def _type_assigned_message(title, url, groups):
@@ -129,7 +193,7 @@ class BuildingController:
                            action_url=url, groups=groups)
 
     @staticmethod
-    def _workers_assigned_message2(title, url, groups):
+    def _workers_assigned_message(title, url, groups):
         return render_part(template='modal/modal-form-2.0.html', modal_id='common-modal',
                            title=title, button_text='Assign', http_method='POST',
                            action_url=url, groups=groups)
