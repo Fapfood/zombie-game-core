@@ -1,5 +1,6 @@
 from .dao import BuildingDAO
 from .dao import PersonDAO
+from .dao import ProductionDAO
 from .dao import ResourceDAO
 from .dao import ShapeMultiPolygonDAO
 from .dao import ShapePointDAO
@@ -15,6 +16,7 @@ from .database import db
 
 BuildingDao = BuildingDAO(db)
 PersonDao = PersonDAO(db)
+ProductionDao = ProductionDAO(db)
 ResourceDao = ResourceDAO(db)
 ShapeMultiPolygonDao = ShapeMultiPolygonDAO(db)
 ShapePointDao = ShapePointDAO(db)
